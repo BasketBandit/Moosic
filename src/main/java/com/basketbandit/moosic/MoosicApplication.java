@@ -41,7 +41,7 @@ public class MoosicApplication {
 		if(action != null){
 			switch(action) {
 				case "skip" -> lavaPlayer.getAudioTrackScheduler().onTrackEnd(lavaPlayer.getPlayer(), lavaPlayer.getPlayer().getPlayingTrack(), AudioTrackEndReason.FINISHED);
-				case "pause" -> lavaPlayer.getPlayer().setPaused(true);
+				case "pause" -> lavaPlayer.getPlayer().setPaused(!lavaPlayer.getPlayer().isPaused());
 			}
 		}
 
