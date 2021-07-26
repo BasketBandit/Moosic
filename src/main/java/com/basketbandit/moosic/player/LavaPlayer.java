@@ -23,7 +23,7 @@ public class LavaPlayer {
         return player;
     }
 
-    public AudioTrackScheduler getTrackScheduler() {
+    public AudioTrackScheduler getAudioTrackScheduler() {
         return audioTrackScheduler;
     }
 
