@@ -18,12 +18,21 @@ public class AudioTrackScheduler extends AudioEventAdapter {
     private final AudioPlayerManager manager;
     private final AudioPlayer player;
     private final Queue<AudioTrack> queue = new LinkedList<>();
+    private AudioTrack last;
 
     public AudioTrackScheduler(AudioPlayerManager manager, AudioPlayer player) {
         this.manager = manager;
         this.player = player;
         this.audioSendHandler = new AudioSendHandler(manager, player);
         this.audioSendHandler.start();
+    }
+
+    public Queue<AudioTrack> getQueue() {
+        return queue;
+    }
+
+    public AudioTrack getLast() {
+        return last;
     }
 
     public void queue(AudioTrack track) {
@@ -63,6 +72,7 @@ public class AudioTrackScheduler extends AudioEventAdapter {
     @Override
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
         if(endReason.mayStartNext) {
+            last = track;
             nextTrack();
         }
     }
