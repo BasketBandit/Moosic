@@ -5,12 +5,7 @@
         <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
     </head>
     <body>
-        <div class="jumbotron jumbotron-fluid mt-2">
-            <div class="container">
-                <h1 class="display-4">Moosic</h1>
-                <p class="lead">Add a song to the queue to begin.</p>
-            </div>
-        </div>
+        <div th:replace="jumbotron"></div>
         <nav th:replace="navigation"></nav>
 
         <div class="container">
