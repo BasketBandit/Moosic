@@ -19,6 +19,10 @@ public class LavaPlayer {
         this.player.addListener(audioTrackScheduler);
     }
 
+    public AudioPlayer getPlayer() {
+        return player;
+    }
+
     public AudioTrackScheduler getTrackScheduler() {
         return audioTrackScheduler;
     }
