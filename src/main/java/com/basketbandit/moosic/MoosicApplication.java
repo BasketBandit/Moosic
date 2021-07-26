@@ -45,7 +45,17 @@ public class MoosicApplication {
 			}
 		}
 
+		// despite code duplication with getData(), it stops flickering when refreshing the page.
 		ModelAndView modelAndView = new ModelAndView("dashboard");
+		modelAndView.addObject("queue", lavaPlayer.getAudioTrackScheduler().getQueue());
+		modelAndView.addObject("current", lavaPlayer.getPlayer().getPlayingTrack());
+		modelAndView.addObject("last", lavaPlayer.getAudioTrackScheduler().getLast());
+		return modelAndView;
+	}
+
+	@GetMapping("/queue")
+	public ModelAndView getData(){
+		ModelAndView modelAndView = new ModelAndView("queue");
 		modelAndView.addObject("queue", lavaPlayer.getAudioTrackScheduler().getQueue());
 		modelAndView.addObject("current", lavaPlayer.getPlayer().getPlayingTrack());
 		modelAndView.addObject("last", lavaPlayer.getAudioTrackScheduler().getLast());
