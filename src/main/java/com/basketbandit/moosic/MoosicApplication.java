@@ -60,7 +60,7 @@ public class MoosicApplication {
 
 	@GetMapping("/queue")
 	public ModelAndView getData(){
-		ModelAndView modelAndView = new ModelAndView("/r/queue");
+		ModelAndView modelAndView = new ModelAndView("queue");
 		modelAndView.addObject("queue", lavaPlayer.getAudioTrackScheduler().getQueue());
 		modelAndView.addObject("history", lavaPlayer.getAudioTrackScheduler().getHistory());
 		modelAndView.addObject("current", lavaPlayer.getPlayer().getPlayingTrack());
