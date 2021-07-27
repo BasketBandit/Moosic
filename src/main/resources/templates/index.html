@@ -1,12 +1,9 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Moosic</title>
-        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
-    </head>
+    <head th:replace="/r/head"></head>
     <body>
-        <div th:replace="jumbotron"></div>
-        <nav th:replace="navigation"></nav>
+        <div th:replace="/r/jumbotron"></div>
+        <nav th:replace="/r/navigation"></nav>
 
         <div class="container">
             <form action="/load" method="post">
