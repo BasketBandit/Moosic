@@ -18,6 +18,7 @@ public class AudioTrackScheduler extends AudioEventAdapter {
     private final AudioPlayerManager manager;
     private final AudioPlayer player;
     private final Queue<AudioTrack> queue = new LinkedList<>();
+    private final Queue<AudioTrack> history = new LinkedList<>();
     private AudioTrack last;
 
     public AudioTrackScheduler(AudioPlayerManager manager, AudioPlayer player) {
@@ -29,6 +30,10 @@ public class AudioTrackScheduler extends AudioEventAdapter {
 
     public Queue<AudioTrack> getQueue() {
         return queue;
+    }
+
+    public Queue<AudioTrack> getHistory() {
+        return history;
     }
 
     public AudioTrack getLast() {
@@ -47,7 +52,9 @@ public class AudioTrackScheduler extends AudioEventAdapter {
         AudioTrack track = queue.poll();
         if(track != null) {
             player.startTrack(track, false);
+            return;
         }
+        player.stopTrack();
     }
 
     public boolean hasNextTrack() {
@@ -72,7 +79,7 @@ public class AudioTrackScheduler extends AudioEventAdapter {
     @Override
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
         if(endReason.mayStartNext) {
-            last = track;
+            history.offer(last = track);
             nextTrack();
         }
     }
