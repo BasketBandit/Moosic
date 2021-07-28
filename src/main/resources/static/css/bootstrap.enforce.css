@@ -4,3 +4,18 @@
 .ml-1 {
     margin-left:0.25rem!important;
 }
+
+.pointer {
+  cursor: pointer;
+}
+
+.arrow::before {
+   font-family: "Font Awesome 5 Free";
+   font-weight: 900;
+   content: "\f107";
+   float: right;
+   transition: all 0.5s;
+}
+.arrow.down::before {
+	transform: rotate(180deg);
+}
