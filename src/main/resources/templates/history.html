@@ -1,4 +1,4 @@
-<tr th:each="track, status : ${queue}">
+<tr th:each="track, status : ${history}">
     <td scope="row" th:text="${status.count}"></td>
     <td><a target="_blank" th:href="${track.getInfo().uri}" th:text="${track.getInfo().title}"></a></td>
     <td th:text="${track.getDuration()}"></td>

@@ -59,10 +59,22 @@ public class MoosicApplication {
 	}
 
 	@GetMapping("/queue")
-	public ModelAndView getData(){
+	public ModelAndView getQueue() {
 		ModelAndView modelAndView = new ModelAndView("queue");
 		modelAndView.addObject("queue", lavaPlayer.getAudioTrackScheduler().getQueue());
+		return modelAndView;
+	}
+
+	@GetMapping("/history")
+	public ModelAndView getHistory() {
+		ModelAndView modelAndView = new ModelAndView("history");
 		modelAndView.addObject("history", lavaPlayer.getAudioTrackScheduler().getHistory());
+		return modelAndView;
+	}
+
+	@GetMapping("/status")
+	public ModelAndView getStatus() {
+		ModelAndView modelAndView = new ModelAndView("status");
 		modelAndView.addObject("current", lavaPlayer.getPlayer().getPlayingTrack());
 		modelAndView.addObject("last", lavaPlayer.getAudioTrackScheduler().getLast());
 		return modelAndView;

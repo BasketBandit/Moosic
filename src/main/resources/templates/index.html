@@ -1,9 +1,9 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="/r/head"></head>
+    <head th:replace="head"></head>
     <body>
-        <div th:replace="/r/jumbotron"></div>
-        <nav th:replace="/r/navigation"></nav>
+        <div th:replace="jumbotron"></div>
+        <nav th:replace="navigation"></nav>
 
         <div class="container">
             <form action="/load" method="post">
