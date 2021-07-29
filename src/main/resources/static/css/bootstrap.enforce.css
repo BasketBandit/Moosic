@@ -19,3 +19,36 @@
 .arrow.down::before {
 	transform: rotate(180deg);
 }
+
+body, html {
+  height: 100%;
+}
+
+.px-m {
+    max-width: 648px;
+}
+
+.bg {
+  background-image: url("/img/bg.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.x-container {
+    position: absolute;
+    left: 0;
+    top: 30%;
+    width: 100%;
+    text-align: center;
+    color: #000;
+}
+
+.xc-container {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    max-width: 648px;
+    margin: auto;
+    border-radius: 5px;
+}
