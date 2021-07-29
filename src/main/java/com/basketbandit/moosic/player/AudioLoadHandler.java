@@ -16,6 +16,18 @@ public class AudioLoadHandler {
     }
 
     public void load(String url) {
-        manager.loadItem(url, new FunctionalResultHandler(audioTrackScheduler::queue, playlist -> playlist.getTracks().forEach(audioTrackScheduler::queue), null, null));
+        manager.loadItem(url, new FunctionalResultHandler(audioTrack -> {
+            audioTrack.setUserData(toTime(audioTrack.getDuration()));
+            audioTrackScheduler.queue(audioTrack);
+        }, playlist -> playlist.getTracks().forEach(audioTrack -> {
+            audioTrack.setUserData(toTime(audioTrack.getDuration()));
+            audioTrackScheduler.queue(audioTrack);
+        }), null, null));
+    }
+
+    public String toTime(long ms) {
+        long second = (ms / 1000) % 60;
+        long minute = (ms / (1000 * 60));
+        return String.format("%02d:%02d", minute, second);
     }
 }

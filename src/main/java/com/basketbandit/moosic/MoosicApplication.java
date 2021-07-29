@@ -54,7 +54,6 @@ public class MoosicApplication {
 		modelAndView.addObject("queue", lavaPlayer.getAudioTrackScheduler().getQueue());
 		modelAndView.addObject("history", lavaPlayer.getAudioTrackScheduler().getHistory());
 		modelAndView.addObject("current", lavaPlayer.getPlayer().getPlayingTrack());
-		modelAndView.addObject("last", lavaPlayer.getAudioTrackScheduler().getLast());
 		return modelAndView;
 	}
 
@@ -76,7 +75,6 @@ public class MoosicApplication {
 	public ModelAndView getStatus() {
 		ModelAndView modelAndView = new ModelAndView("status");
 		modelAndView.addObject("current", lavaPlayer.getPlayer().getPlayingTrack());
-		modelAndView.addObject("last", lavaPlayer.getAudioTrackScheduler().getLast());
 		return modelAndView;
 	}
 }
