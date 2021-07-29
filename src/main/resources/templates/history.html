@@ -1,4 +1,5 @@
-<table id="history" class="table table-striped table-bordered table-hover my-2">
+<span class="lead" th:if="${history.size() == 0}">None</span>
+<table id="history" class="table table-striped table-bordered table-hover my-2" th:if="${history.size() > 0}">
     <thead>
         <tr>
             <th scope="col">#</th>
