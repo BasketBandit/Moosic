@@ -1,4 +1,4 @@
-<span class="lead" th:if="${queue.size() == 0}">None</span>
+<span id="queue" class="lead" th:if="${queue.size() == 0}">None</span>
 <table id="queue" class="table table-striped table-bordered table-hover my-2" th:if="${queue.size() > 0}">
     <thead>
         <tr>
