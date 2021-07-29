@@ -3,12 +3,16 @@
     <head th:replace="head"></head>
     <body>
         <div th:replace="jumbotron"></div>
-        <nav th:replace="navigation"></nav>
 
         <!-- Controls -->
         <div class="container">
-            <!-- <a href="/dashboard?action=pause"><div class="btn btn-primary">Pause</div></a> -->
-            <a href="/dashboard?action=skip"><div class="btn btn-primary">Skip</div></a>
+            <div class="shadow-sm bg-light px-3 py-2 my-2">
+                <button id="play" class="btn btn-sm btn-success" type="button">Play</button>
+                <button id="skip" class="btn btn-sm btn-primary" type="button">Skip</button>
+                <button id="stop" class="btn btn-sm btn-danger" type="button">Stop</button>
+                <button id="clear-queue" class="btn btn-sm btn-dark" type="button">Clear Queue</button>
+                <button id="clear-history" class="btn btn-sm btn-dark" type="button">Clear History</button>
+            </div>
         </div>
 
         <!-- Queue -->

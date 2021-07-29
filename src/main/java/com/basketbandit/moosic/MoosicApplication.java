@@ -37,24 +37,33 @@ public class MoosicApplication {
 	}
 
 	@GetMapping("/dashboard")
-	public ModelAndView dashboard(@RequestParam(value = "action", required = false) String action) {
-		if(action != null){
-			switch(action) {
-				case "skip" -> {
-					if(lavaPlayer.getPlayer().getPlayingTrack() != null) {
-						lavaPlayer.getAudioTrackScheduler().onTrackEnd(lavaPlayer.getPlayer(), lavaPlayer.getPlayer().getPlayingTrack(), AudioTrackEndReason.FINISHED);
-					}
-				}
-				case "pause" -> lavaPlayer.getPlayer().setPaused(!lavaPlayer.getPlayer().isPaused());
-			}
-		}
-
-		// despite code duplication with getData(), it stops flickering when refreshing the page.
+	public ModelAndView dashboard() {
 		ModelAndView modelAndView = new ModelAndView("dashboard");
 		modelAndView.addObject("queue", lavaPlayer.getAudioTrackScheduler().getQueue());
 		modelAndView.addObject("history", lavaPlayer.getAudioTrackScheduler().getHistory());
 		modelAndView.addObject("current", lavaPlayer.getPlayer().getPlayingTrack());
 		return modelAndView;
+	}
+
+	@PostMapping("/action")
+	public void processAction(@RequestParam(value = "value", required = false) String value) {
+		if(value != null){
+			switch(value) {
+				case "play" -> {
+					if(lavaPlayer.getPlayer().getPlayingTrack() == null) {
+						lavaPlayer.getAudioTrackScheduler().nextTrack();
+					}
+				}
+				case "skip" -> {
+					if(lavaPlayer.getPlayer().getPlayingTrack() != null) {
+						lavaPlayer.getAudioTrackScheduler().onTrackEnd(lavaPlayer.getPlayer(), lavaPlayer.getPlayer().getPlayingTrack(), AudioTrackEndReason.FINISHED);
+					}
+				}
+				case "clear-queue" -> lavaPlayer.getAudioTrackScheduler().getQueue().clear();
+				case "clear-history" -> lavaPlayer.getAudioTrackScheduler().getHistory().clear();
+				case "stop" -> lavaPlayer.getPlayer().stopTrack();
+			}
+		}
 	}
 
 	@GetMapping("/queue")
