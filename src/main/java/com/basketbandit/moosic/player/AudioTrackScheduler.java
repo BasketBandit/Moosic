@@ -9,6 +9,8 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -18,7 +20,7 @@ public class AudioTrackScheduler extends AudioEventAdapter {
     private final AudioPlayerManager manager;
     private final AudioPlayer player;
     private final Queue<AudioTrack> queue = new LinkedList<>();
-    private final Queue<AudioTrack> history = new LinkedList<>();
+    private final Deque<AudioTrack> history = new ArrayDeque<>(); // Originally wanted to use java.util.Stack but despite being LIFO the .foreach doesn't respect that ordering whereas java.util.Deque does.
     private AudioTrack last;
 
     public AudioTrackScheduler(AudioPlayerManager manager, AudioPlayer player) {
@@ -32,7 +34,7 @@ public class AudioTrackScheduler extends AudioEventAdapter {
         return queue;
     }
 
-    public Queue<AudioTrack> getHistory() {
+    public Deque<AudioTrack> getHistory() {
         return history;
     }
 
@@ -79,7 +81,7 @@ public class AudioTrackScheduler extends AudioEventAdapter {
     @Override
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
         if(endReason.mayStartNext) {
-            history.offer(last = track);
+            history.push(last = track);
             nextTrack();
         }
     }
