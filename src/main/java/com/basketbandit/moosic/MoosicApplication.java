@@ -102,9 +102,9 @@ public class MoosicApplication {
 		return modelAndView;
 	}
 
-	@GetMapping("/status")
-	public ModelAndView getStatus() {
-		ModelAndView modelAndView = new ModelAndView("status");
+	@GetMapping("/current")
+	public ModelAndView getCurrent() {
+		ModelAndView modelAndView = new ModelAndView("current");
 		modelAndView.addObject("current", scheduler.getCurrentTrack());
 		return modelAndView;
 	}
