@@ -8,36 +8,41 @@
         <!-- Controls -->
         <div class="container">
             <div class="shadow-sm bg-light px-3 py-2 my-2">
-                <button id="play" class="btn btn-sm btn-success" type="button">Play</button>
-                <button id="skip" class="btn btn-sm btn-primary" type="button">Skip</button>
-                <button id="stop" class="btn btn-sm btn-danger" type="button">Stop</button>
-                <button id="clear-queue" class="btn btn-sm btn-dark" type="button">Clear Queue</button>
-                <button id="clear-history" class="btn btn-sm btn-dark" type="button">Clear History</button>
+                <button id="clearQueue" class="btn btn-sm btn-dark" type="button">Clear Queue</button>
+                <button id="clearHistory" class="btn btn-sm btn-dark" type="button">Clear History</button>
             </div>
         </div>
 
         <!-- Queue -->
         <div class="container">
-            <div id="status" class="w-100 shadow-sm bg-light px-3 py-2 my-2">
-                <div th:replace="status"></div>
+            <div class="w-100 shadow-sm bg-light text-center px-3 py-2 my-2">
+                <div class="mt-1">
+                    <span>Currently Playing</span><br>
+                    <div id="current" th:insert="current"></div>
+                </div>
+                <div id="controls" class="m-1 mt-2">
+                    <div id="control-group">
+                        <button id="play" type="button"><i class="fas fa-play"></i></button>
+                        <button id="pause" type="button"><i class="fas fa-pause"></i></button>
+                        <button id="skip" type="button"><i class="fas fa-forward"></i></button>
+                    </div>
+                    <div id="progress" class="mx-1" th:insert="progress"></div>
+                    <input id="volume" type="range" th:value="${player.getVolume()}" min="0" max="100">
+                </div>
             </div>
 
             <div class="shadow-sm bg-light px-3 py-2 my-1">
                 <div id="queueCollapseButton" class="position-relative pointer arrow" data-bs-toggle="collapse" data-bs-target="#queueCollapse" aria-expanded="true" aria-controls="queueCollapse">Queue</div>
-                <div id="queueCollapse" class="collapse show">
-                    <div th:replace="queue"></div>
-                </div>
+                <div id="queueCollapse" class="collapse show" th:insert="queue"></div>
             </div>
 
             <div class="shadow-sm bg-light px-3 py-2 my-2">
                 <div id="historyCollapseButton" class="position-relative pointer arrow" data-bs-toggle="collapse" data-bs-target="#historyCollapse" aria-expanded="true" aria-controls="historyCollapse">History</div>
-                <div id="historyCollapse" class="collapse show">
-                    <div th:replace="history"></div>
-                </div>
+                <div id="historyCollapse" class="collapse show" th:insert="history"></div>
             </div>
         </div>
 
-        <!-- Refresh queue data every second -->
-        <script src="/js/refresh-data.js"></script>
+        <!-- Refresh data every second -->
+        <script src="/js/scripts.js"></script>
     </body>
 </html>

@@ -34,7 +34,7 @@ $(document).ready(function() {
     function refreshData(){
         $('#queueCollapse').load("/queue");
         $('#historyCollapse').load("/history");
-        $('#status').load("/status");
+        $('#current').load("/current");
         setTimeout(refreshData, 1000);
     }
     refreshData();

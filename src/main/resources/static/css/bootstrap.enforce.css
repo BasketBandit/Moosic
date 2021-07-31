@@ -1,13 +1,39 @@
+body, html {
+    height: 100%;
+    background-color: #D3D3D3;
+}
+
+#controls button {
+    border: none;
+    background-color: unset;
+    padding: 0;
+    margin-left: 0.5rem!important;
+    vertical-align: text-bottom;
+}
+
+#control-group {
+    width: 129px; /* this is to match the default size of the slider (centers everything) */
+    display: inline-flex;
+    justify-content: flex-end;
+    vertical-align: text-bottom;
+}
+
 .mr-1 {
     margin-right:0.25rem!important;
 }
 .ml-1 {
     margin-left:0.25rem!important;
 }
+.px-m {
+    max-width: 648px;
+}
 
 .pointer {
-  cursor: pointer;
+    cursor: pointer;
 }
+
+
+/* Dashboard */
 
 .arrow::before {
    font-family: "Font Awesome 5 Free";
@@ -20,14 +46,12 @@
 	transform: rotate(180deg);
 }
 
-body, html {
-  height: 100%;
-  background-color: #D3D3D3;
+#progress {
+    width: 50%;
+    display: inline-block;
 }
 
-.px-m {
-    max-width: 648px;
-}
+/* Index Page */
 
 .bg {
   background-image: url("/img/bg.jpg");

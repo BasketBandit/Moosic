@@ -1,0 +1,4 @@
+<div class="progress my-2">
+    <div th:if="${current != null}" class="progress-bar" role="progressbar" th:style="${'width:' + progress + '%'}" aria-valuemin="0" th:attr="aria-valuenow=${current.getPosition()}, aria-valuemax=${current.getDuration()}"></div>
+    <div th:if="${current == null}" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1"></div>
+</div>
