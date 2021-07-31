@@ -38,7 +38,15 @@ public class AudioTrackScheduler extends AudioEventAdapter {
         return history;
     }
 
-    public AudioTrack getLast() {
+    public AudioTrack getCurrentTrack() {
+        return player.getPlayingTrack();
+    }
+
+    public double getCurrentTrackProgress() {
+        return getCurrentTrack() != null ? (double) Math.round(((getCurrentTrack().getPosition()+.0)/(getCurrentTrack().getDuration()+.0)*100) * 100) / 100 : 0.0;
+    }
+
+    public AudioTrack getLastTrack() {
         return last;
     }
 
@@ -57,10 +65,6 @@ public class AudioTrackScheduler extends AudioEventAdapter {
             return;
         }
         player.stopTrack();
-    }
-
-    public boolean hasNextTrack() {
-        return (queue.peek() != null);
     }
 
     @Override
