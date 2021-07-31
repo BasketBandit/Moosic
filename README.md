@@ -9,10 +9,20 @@ Hosted via Localhost, users connect to the embedded HTTP server at [http://local
 - [Java 16](https://jdk.java.net/16/)
 
 #### Instructions
-1) Download JAR file from this repository.
-2) Open terminal in the directory the JAR is stored and run <code>java -jar Moosic.jar</code>
-3) Navigate to [http://localhost:8080](http://localhost:8080) in your favourite browser to start.
-**For full functionality, make sure JavaScript is enabled.*
+<ol>
+    <li>Download this repository and unzip it anywhere.</li>
+    <li>To launch the application, either:</li>
+        <ol>
+            <li>Double click <code>Moosic.bat</code></li>
+            <li>Navigate to <code>/build/libs</code>, open a terminal and run <code>java -jar moosic-[version].jar</code>.</li>
+        </ol>
+    <li>Navigate to <a href="http://localhost:8080">localhost:8080</a> in your favourite browser to start.</li>
+    <li>To stop the application, either:</li>
+        <ol>
+            <li>Push the close button. (red x)</li>
+            <li>Key <code>CTRL + C</code> in the terminal window.</li>
+        </ol>
+</ol>
 
 ### Support
 [LavaPlayer](https://github.com/sedmelluq/lavaplayer) the audio player library Moosic is based upon supports a number of HTTP sources, there are the ones that have been enabled:
