@@ -39,6 +39,7 @@ Here are some screenshots of how Moosic currently looks, I will try to keep thes
 
 ![landing](resources/landing.png)
 ![dashboard](resources/dashboard.png)
+![console](resources/console.png)
 
 
 
