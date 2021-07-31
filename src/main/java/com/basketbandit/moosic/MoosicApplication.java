@@ -56,18 +56,28 @@ public class MoosicApplication {
 		if(parameter != null){
 			switch(parameter) {
 				case "play" -> {
-					if(lavaPlayer.getPlayer().getPlayingTrack() == null) {
+					if(player.isPaused()) {
+						lavaPlayer.getPlayer().setPaused(false); // don't want to unpause if not paused as AudioTrackScheduler#onPlayerResume will fire
+					}
+					if(scheduler.getCurrentTrack() == null) {
 						scheduler.nextTrack();
 					}
 				}
+				case "pause" -> {
+					if(!player.isPaused() && scheduler.getCurrentTrack() != null) {
+						player.setPaused(true); // don't want to pause if already paused as AudioTrackScheduler#onPlayerPause will fire
+					}
+				}
 				case "skip" -> {
-					if(lavaPlayer.getPlayer().getPlayingTrack() != null) {
+					if(scheduler.getCurrentTrack() != null) {
+						if(player.isPaused()) {
+							player.setPaused(false);
+						}
 						scheduler.onTrackEnd(player, scheduler.getCurrentTrack(), AudioTrackEndReason.FINISHED);
 					}
 				}
 				case "clearQueue" -> scheduler.getQueue().clear();
 				case "clearHistory" -> scheduler.getHistory().clear();
-				case "stop" -> player.stopTrack();
 				case "volume" -> {
 					if(value != null) {
 						int volume = Integer.parseInt(value);
