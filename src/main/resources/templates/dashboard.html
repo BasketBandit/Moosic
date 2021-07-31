@@ -22,9 +22,9 @@
                 </div>
                 <div id="controls" class="m-1 mt-2">
                     <div id="control-group">
-                        <button id="play" type="button"><i class="fas fa-play"></i></button>
-                        <button id="pause" type="button"><i class="fas fa-pause"></i></button>
-                        <button id="skip" type="button"><i class="fas fa-forward"></i></button>
+                        <button id="play" type="button"><i class="fas fa-play" title="Play"></i></button>
+                        <button id="pause" type="button"><i class="fas fa-pause" title="Pause"></i></button>
+                        <button id="skip" type="button"><i class="fas fa-forward" title="Skip"></i></button>
                     </div>
                     <div id="progress" class="mx-1" th:insert="progress"></div>
                     <input id="volume" type="range" th:value="${player.getVolume()}" min="0" max="100">

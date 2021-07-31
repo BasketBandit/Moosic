@@ -5,6 +5,7 @@
             <th scope="col">#</th>
             <th scope="col">Title</th>
             <th scope="col">Length</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody th:fragment="history">
@@ -12,6 +13,7 @@
             <td scope="row" th:text="${status.count}"></td>
             <td><a target="_blank" th:href="${track.getInfo().uri}" th:text="${track.getInfo().title}"></a></td>
             <td th:text="${track.getUserData()}"></td>
+            <td><button class="requeue" th:attr="data-url=${track.getInfo().uri}"><i class="fas fa-recycle" title="Queue"></i></button></td>
         </tr>
     </tbody>
 </table>

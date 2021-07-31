@@ -31,6 +31,10 @@ $(document).ready(function() {
         $.post("action", { parameter: "volume", value: $("#volume").val() }, function(data, status){});
     });
 
+    $(document).on('click', '.requeue', function(){
+        $.post("load", { url: $(this).data('url') }, function(data, status){});
+    });
+
     function refreshData(){
         $('#queueCollapse').load("/queue");
         $('#historyCollapse').load("/history");
