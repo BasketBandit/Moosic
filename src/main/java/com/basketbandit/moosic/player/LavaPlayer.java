@@ -16,6 +16,7 @@ public class LavaPlayer {
 
     public LavaPlayer() {
         AudioSourceManagers.registerRemoteSources(this.manager);
+        this.player.setVolume(50);
         this.player.addListener(audioTrackScheduler);
     }
 
