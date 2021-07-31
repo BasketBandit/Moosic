@@ -10,7 +10,7 @@ Hosted via Localhost, users connect to the embedded HTTP server at [http://local
 
 #### Instructions
 <ol>
-    <li>Download this repository and unzip it anywhere.</li>
+    <li>Download this <a href="https://github.com/BasketBandit/Moosic/archive/refs/heads/main.zip">repository</a> and unzip it anywhere.</li>
     <li>To launch the application, either:</li>
         <ol>
             <li>Double click <code>Moosic.bat</code></li>
