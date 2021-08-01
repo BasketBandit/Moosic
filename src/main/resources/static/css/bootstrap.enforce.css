@@ -7,15 +7,13 @@ body, html {
     border: none;
     background-color: unset;
     padding: 0;
-    margin-left: 0.5rem!important;
-    vertical-align: text-bottom;
+    margin-left: 0.75rem!important;
 }
 
 #control-group {
     width: 129px; /* this is to match the default size of the slider (centers everything) */
     display: inline-flex;
     justify-content: flex-end;
-    vertical-align: middle;
 }
 
 .mr-1 {
