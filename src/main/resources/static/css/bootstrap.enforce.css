@@ -3,17 +3,25 @@ body, html {
     background-color: #D3D3D3;
 }
 
+small {
+    line-height: 1.95rem!important;
+}
+
+.row {
+    --bs-gutter-x: 0!important;
+    --bs-gutter-y: 0!important;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0!important;
+    margin-right: 0!important;
+    margin-left: 0!important;
+}
+
 #controls button, #history button {
     border: none;
     background-color: unset;
     padding: 0;
     margin-left: 0.75rem!important;
-}
-
-#control-group {
-    width: 129px; /* this is to match the default size of the slider (centers everything) */
-    display: inline-flex;
-    justify-content: flex-end;
 }
 
 .mr-1 {
@@ -41,25 +49,6 @@ body, html {
 }
 .arrow.down::before {
 	transform: rotate(180deg);
-}
-
-#progress {
-    width: 50%;
-    display: inline-block;
-}
-
-.col-sm-1 {
-    line-height: 1.95rem!important;
-}
-
-.row {
-    --bs-gutter-x: 0!important;
-    --bs-gutter-y: 0!important;
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 0!important;
-    margin-right: 0!important;
-    margin-left: 0!important;
 }
 
 /* Index Page */
