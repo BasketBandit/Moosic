@@ -5,6 +5,8 @@ import com.sedmelluq.discord.lavaplayer.player.FunctionalResultHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+
 public class AudioLoadHandler {
     private static final Logger log = LoggerFactory.getLogger(AudioLoadHandler.class);
     private final AudioPlayerManager manager;
@@ -17,15 +19,23 @@ public class AudioLoadHandler {
 
     public void load(String url) {
         manager.loadItem(url, new FunctionalResultHandler(audioTrack -> {
-            audioTrack.setUserData(toTime(audioTrack.getDuration()));
+            HashMap<String, String> data = new HashMap<>() {{
+                put("position", toTime(0));
+                put("duration", toTime(audioTrack.getDuration()));
+            }};
+            audioTrack.setUserData(data);
             audioTrackScheduler.queue(audioTrack);
         }, playlist -> playlist.getTracks().forEach(audioTrack -> {
-            audioTrack.setUserData(toTime(audioTrack.getDuration()));
+            HashMap<String, String> data = new HashMap<>() {{
+                put("position", toTime(0));
+                put("duration", toTime(audioTrack.getDuration()));
+            }};
+            audioTrack.setUserData(data);
             audioTrackScheduler.queue(audioTrack);
         }), null, null));
     }
 
-    public String toTime(long ms) {
+    public static String toTime(long ms) {
         long second = (ms / 1000) % 60;
         long minute = (ms / (1000 * 60));
         return String.format("%02d:%02d", minute, second);

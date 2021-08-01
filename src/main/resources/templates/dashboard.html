@@ -26,8 +26,8 @@
                         <button id="pause" type="button"><i class="fas fa-pause" title="Pause"></i></button>
                         <button id="skip" type="button"><i class="fas fa-forward" title="Skip"></i></button>
                     </div>
-                    <div id="progress" class="mx-1" th:insert="progress"></div>
-                    <input id="volume" type="range" th:value="${player.getVolume()}" min="0" max="100">
+                    <div id="progress" class="align-middle mx-1" th:insert="progress"></div>
+                    <input id="volume" class="align-middle" type="range" th:value="${player.getVolume()}" min="0" max="100">
                 </div>
             </div>
 

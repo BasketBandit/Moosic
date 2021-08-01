@@ -11,7 +11,7 @@
         <tr th:each="track, status : ${queue}">
             <td scope="row" th:text="${status.count}"></td>
             <td><a target="_blank" th:href="${track.getInfo().uri}" th:text="${track.getInfo().title}"></a></td>
-            <td th:text="${track.getUserData()}"></td>
+            <td th:text="${track.getUserData().get('duration')}"></td>
         </tr>
     </tbody>
 </table>

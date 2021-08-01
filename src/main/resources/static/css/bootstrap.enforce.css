@@ -15,7 +15,7 @@ body, html {
     width: 129px; /* this is to match the default size of the slider (centers everything) */
     display: inline-flex;
     justify-content: flex-end;
-    vertical-align: text-bottom;
+    vertical-align: middle;
 }
 
 .mr-1 {
@@ -31,7 +31,6 @@ body, html {
 .pointer {
     cursor: pointer;
 }
-
 
 /* Dashboard */
 
@@ -49,6 +48,20 @@ body, html {
 #progress {
     width: 50%;
     display: inline-block;
+}
+
+.col-sm-1 {
+    line-height: 1.95rem!important;
+}
+
+.row {
+    --bs-gutter-x: 0!important;
+    --bs-gutter-y: 0!important;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0!important;
+    margin-right: 0!important;
+    margin-left: 0!important;
 }
 
 /* Index Page */

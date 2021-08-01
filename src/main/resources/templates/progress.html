@@ -1,4 +1,8 @@
-<div class="progress my-2">
-    <div th:if="${current != null}" class="progress-bar" role="progressbar" th:style="${'width:' + progress + '%'}" aria-valuemin="0" th:attr="aria-valuenow=${current.getPosition()}, aria-valuemax=${current.getDuration()}"></div>
-    <div th:if="${current == null}" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1"></div>
+<div class="row">
+    <div class="col-sm-1 mx-1 align-text-bottom" th:text="${current != null} ? ${current.getUserData().get('position')} : '00:00'"></div>
+    <div class="col progress my-2">
+        <div th:if="${current != null}" class="progress-bar" role="progressbar" th:style="${'width:' + progress + '%'}" aria-valuemin="0" th:attr="aria-valuenow=${current.getPosition()}, aria-valuemax=${current.getDuration()}"></div>
+        <div th:if="${current == null}" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1"></div>
+    </div>
+    <div class="col-sm-1 mx-1 align-text-bottom" th:text="${current != null} ? ${current.getUserData().get('duration')} : '00:00'"></div>
 </div>

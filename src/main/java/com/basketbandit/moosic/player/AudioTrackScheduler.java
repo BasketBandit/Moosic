@@ -40,8 +40,13 @@ public class AudioTrackScheduler extends AudioEventAdapter {
         return (player.getPlayingTrack() != null) ? player.getPlayingTrack() : (pausedTrack != null && player.isPaused()) ? pausedTrack : null;
     }
 
+    @SuppressWarnings("unchecked")
     public double getCurrentTrackProgress() {
-        return getCurrentTrack() != null ? (double) Math.round(((getCurrentTrack().getPosition()+.0)/(getCurrentTrack().getDuration()+.0)*100) * 100) / 100 : 0.0;
+        if(getCurrentTrack() != null) {
+            ((HashMap<String, String>) getCurrentTrack().getUserData()).put("position", AudioLoadHandler.toTime(getCurrentTrack().getPosition()));
+            return (double) Math.round(((getCurrentTrack().getPosition()+.0)/(getCurrentTrack().getDuration()+.0)*100) * 100) / 100;
+        }
+        return 0.0;
     }
 
     public AudioTrack getLastTrack() {
