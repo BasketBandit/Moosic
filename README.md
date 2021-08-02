@@ -14,7 +14,7 @@ Hosted via Localhost, users connect to the embedded HTTP server at [http://local
     <li>To launch the application, either:</li>
         <ol>
             <li>Double click <code>Moosic.bat</code></li>
-            <li>Navigate to <code>/build/libs</code>, open a terminal and run <code>java -jar moosic-[version].jar</code>.</li>
+            <li>Navigate to <code>/build/libs</code>, open a terminal and run <code>java -Dserver-port=80 -jar moosic-[version].jar</code>. (feel free to change ports)</li>
         </ol>
     <li>Navigate to <a href="http://localhost:8080">localhost:8080</a> in your favourite browser to start.</li>
     <li>To stop the application, either:</li>
