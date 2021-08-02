@@ -12,16 +12,8 @@ small {
     --bs-gutter-y: 0!important;
     display: flex;
     flex-wrap: wrap;
-    margin-top: 0!important;
     margin-right: 0!important;
     margin-left: 0!important;
-}
-
-#controls button, #history button {
-    border: none;
-    background-color: unset;
-    padding: 0;
-    margin-left: 0.75rem!important;
 }
 
 .mr-1 {
@@ -49,6 +41,25 @@ small {
 }
 .arrow.down::before {
 	transform: rotate(180deg);
+}
+
+.progress {
+
+}
+
+#controls {
+    justify-content: center;
+}
+
+#controls button, #history button {
+    border: none;
+    background-color: unset;
+    padding: 0;
+    margin-left: 0.75rem!important;
+}
+
+#volume {
+    width: 75px;
 }
 
 /* Index Page */

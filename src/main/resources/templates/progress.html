@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row justify-content-center">
     <small class="col text-muted vertical-align-middle mx-1" th:text="${current != null} ? ${current.getUserData().get('position')} : '00:00'"></small>
     <div class="col-10 progress my-2">
         <div th:if="${current != null}" class="progress-bar" role="progressbar" th:style="${'width:' + progress + '%'}" aria-valuemin="0" th:attr="aria-valuenow=${current.getPosition()}, aria-valuemax=${current.getDuration()}"></div>
