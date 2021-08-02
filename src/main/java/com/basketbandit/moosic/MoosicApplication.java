@@ -46,8 +46,8 @@ public class MoosicApplication {
 		modelAndView.addObject("player", player);
 		modelAndView.addObject("queue", scheduler.getQueue());
 		modelAndView.addObject("history", scheduler.getHistory());
-		modelAndView.addObject("current", scheduler.getCurrentTrack());
-		modelAndView.addObject("progress", scheduler.getCurrentTrackProgress());
+		modelAndView.addObject("active", scheduler.getActiveTrack());
+		modelAndView.addObject("progress", scheduler.getActiveTrackProgress());
 		return modelAndView;
 	}
 
@@ -55,25 +55,10 @@ public class MoosicApplication {
 	public void processAction(@RequestParam(value = "parameter", required = false) String parameter, @RequestParam(value = "value", required = false) String value) {
 		if(parameter != null){
 			switch(parameter) {
-				case "play" -> {
-					if(player.isPaused()) {
-						lavaPlayer.getPlayer().setPaused(false); // don't want to unpause if not paused as AudioTrackScheduler#onPlayerResume will fire
-					}
-					if(scheduler.getCurrentTrack() == null) {
-						scheduler.nextTrack();
-					}
-				}
-				case "pause" -> {
-					if(!player.isPaused() && scheduler.getCurrentTrack() != null) {
-						player.setPaused(true); // don't want to pause if already paused as AudioTrackScheduler#onPlayerPause will fire
-					}
-				}
+				case "play" -> player.setPaused(!player.isPaused());
 				case "skip" -> {
-					if(scheduler.getCurrentTrack() != null) {
-						if(player.isPaused()) {
-							player.setPaused(false);
-						}
-						scheduler.onTrackEnd(player, scheduler.getCurrentTrack(), AudioTrackEndReason.FINISHED);
+					if(scheduler.getActiveTrack() != null) {
+						scheduler.onTrackEnd(player, scheduler.getActiveTrack(), AudioTrackEndReason.FINISHED);
 					}
 				}
 				case "clearQueue" -> scheduler.getQueue().clear();
@@ -102,18 +87,25 @@ public class MoosicApplication {
 		return modelAndView;
 	}
 
-	@GetMapping("/current")
-	public ModelAndView getCurrent() {
-		ModelAndView modelAndView = new ModelAndView("current");
-		modelAndView.addObject("current", scheduler.getCurrentTrack());
+	@GetMapping("/active")
+	public ModelAndView getActive() {
+		ModelAndView modelAndView = new ModelAndView("active");
+		modelAndView.addObject("active", scheduler.getActiveTrack());
 		return modelAndView;
 	}
 
 	@GetMapping("/progress")
 	public ModelAndView getProgress() {
 		ModelAndView modelAndView = new ModelAndView("progress");
-		modelAndView.addObject("current", scheduler.getCurrentTrack());
-		modelAndView.addObject("progress", scheduler.getCurrentTrackProgress());
+		modelAndView.addObject("active", scheduler.getActiveTrack());
+		modelAndView.addObject("progress", scheduler.getActiveTrackProgress());
+		return modelAndView;
+	}
+
+	@GetMapping("/controls")
+	public ModelAndView getControls() {
+		ModelAndView modelAndView = new ModelAndView("controls");
+		modelAndView.addObject("player", player);
 		return modelAndView;
 	}
 }

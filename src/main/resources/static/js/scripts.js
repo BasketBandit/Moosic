@@ -1,14 +1,12 @@
 $(document).ready(function() {
     $("#play").click(function(){
-        $.post("action", { parameter: "play" }, function(data, status){});
+        $.post("action", { parameter: "play" }, function(data, status){
+            $('#play').load("/controls");
+        });
     });
 
     $("#skip").click(function(){
         $.post("action", { parameter: "skip" }, function(data, status){});
-    });
-
-    $("#pause").click(function(){
-        $.post("action", { parameter: "pause" }, function(data, status){});
     });
 
     $("#clearQueue").click(function(){
@@ -38,7 +36,7 @@ $(document).ready(function() {
     function refreshData(){
         $('#queueCollapse').load("/queue");
         $('#historyCollapse').load("/history");
-        $('#current').load("/current");
+        $('#active').load("/active");
         setTimeout(refreshData, 1000);
     }
     refreshData();

@@ -18,12 +18,11 @@
             <div class="w-100 shadow-sm bg-light text-center px-3 py-2 my-2">
                 <div class="mt-1">
                     <span>Currently Playing</span><br>
-                    <div id="current" th:insert="current"></div>
+                    <div id="active" th:insert="active"></div>
                 </div>
-                <div id="controls" class="row m-1 my-2">
-                    <div class="col-2 d-flex justify-content-end mx-1">
-                        <button id="play" type="button"><i class="fas fa-play" title="Play"></i></button>
-                        <button id="pause" type="button"><i class="fas fa-pause" title="Pause"></i></button>
+                <div id="player" class="row m-1 my-2">
+                    <div id="controls" class="col-2 d-flex justify-content-end mx-1">
+                        <button id="play" type="button"><i id="play-icon" th:class="${player.isPaused() ? 'fas fa-play' : 'fas fa-pause' }" title="Play"></i></button>
                         <button id="skip" type="button"><i class="fas fa-forward" title="Skip"></i></button>
                     </div>
                     <div id="progress" class="col-6 mx-1 " th:insert="progress"></div>
