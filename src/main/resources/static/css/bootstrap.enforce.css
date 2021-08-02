@@ -47,11 +47,11 @@ small {
 
 }
 
-#controls {
+#player {
     justify-content: center;
 }
 
-#controls button, #history button {
+#player button, #history button {
     border: none;
     background-color: unset;
     padding: 0;

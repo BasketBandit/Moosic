@@ -36,15 +36,15 @@ public class AudioTrackScheduler extends AudioEventAdapter {
         return history;
     }
 
-    public AudioTrack getCurrentTrack() {
+    public AudioTrack getActiveTrack() {
         return (player.getPlayingTrack() != null) ? player.getPlayingTrack() : (pausedTrack != null && player.isPaused()) ? pausedTrack : null;
     }
 
     @SuppressWarnings("unchecked")
-    public double getCurrentTrackProgress() {
-        if(getCurrentTrack() != null) {
-            ((HashMap<String, String>) getCurrentTrack().getUserData()).put("position", AudioLoadHandler.toTime(getCurrentTrack().getPosition()));
-            return (double) Math.round(((getCurrentTrack().getPosition()+.0)/(getCurrentTrack().getDuration()+.0)*100) * 100) / 100;
+    public double getActiveTrackProgress() {
+        if(getActiveTrack() != null) {
+            ((HashMap<String, String>) getActiveTrack().getUserData()).put("position", AudioLoadHandler.toTime(getActiveTrack().getPosition()));
+            return (double) Math.round(((getActiveTrack().getPosition()+.0)/(getActiveTrack().getDuration()+.0)*100) * 100) / 100;
         }
         return 0.0;
     }
@@ -54,33 +54,38 @@ public class AudioTrackScheduler extends AudioEventAdapter {
     }
 
     public void queue(AudioTrack track) {
+        log.info("Queued track: {}", track.getInfo().title);
         queue.offer(track);
-        log.info("Queuing track: {}", track.getInfo().title);
         if(player.getPlayingTrack() == null) {
             nextTrack();
         }
     }
 
     public void nextTrack() {
-        AudioTrack track = queue.poll();
-        if(track != null) {
+        if(!player.isPaused()) {
+            AudioTrack track = queue.poll();
             player.startTrack(track, false);
-            return;
         }
-        player.stopTrack();
     }
 
     @Override
     public void onPlayerPause(AudioPlayer player) {
-        AudioTrack track = getCurrentTrack().makeClone();
-        track.setPosition(getCurrentTrack().getPosition());
-        pausedTrack = track;
-        player.stopTrack();
+        if(player.getPlayingTrack() != null) {
+            AudioTrack track = getActiveTrack().makeClone();
+            track.setPosition(getActiveTrack().getPosition());
+            pausedTrack = track;
+            player.stopTrack();
+        }
     }
 
     @Override
     public void onPlayerResume(AudioPlayer player) {
-        player.playTrack(pausedTrack);
+        if(pausedTrack != null) {
+            player.playTrack(pausedTrack);
+            pausedTrack = null;
+            return;
+        }
+        nextTrack();
     }
 
     @Override
