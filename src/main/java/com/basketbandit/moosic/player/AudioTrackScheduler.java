@@ -18,7 +18,6 @@ public class AudioTrackScheduler extends AudioEventAdapter {
     private final AudioPlayer player;
     private final Queue<AudioTrack> queue = new LinkedList<>();
     private final Deque<AudioTrack> history = new ArrayDeque<>(); // Originally wanted to use java.util.Stack but despite being LIFO the .foreach doesn't respect that ordering whereas java.util.Deque does.
-    private AudioTrack last;
     private AudioTrack pausedTrack;
 
     public AudioTrackScheduler(AudioPlayerManager manager, AudioPlayer player) {
@@ -26,6 +25,13 @@ public class AudioTrackScheduler extends AudioEventAdapter {
         this.player = player;
         this.audioSendHandler = new AudioSendHandler(manager, player);
         this.audioSendHandler.start();
+    }
+
+    public void shuffleQueue() {
+        List<AudioTrack> temp = new ArrayList<>(queue);
+        Collections.shuffle(temp);
+        queue.clear();
+        queue.addAll(temp);
     }
 
     public Queue<AudioTrack> getQueue() {
@@ -49,10 +55,6 @@ public class AudioTrackScheduler extends AudioEventAdapter {
         return 0.0;
     }
 
-    public AudioTrack getLastTrack() {
-        return last;
-    }
-
     public void queue(AudioTrack track) {
         log.info("Queued track: {}", track.getInfo().title);
         queue.offer(track);
@@ -71,8 +73,8 @@ public class AudioTrackScheduler extends AudioEventAdapter {
     @Override
     public void onPlayerPause(AudioPlayer player) {
         if(player.getPlayingTrack() != null) {
-            AudioTrack track = getActiveTrack().makeClone();
-            track.setPosition(getActiveTrack().getPosition());
+            AudioTrack track = player.getPlayingTrack().makeClone();
+            track.setPosition(player.getPlayingTrack().getPosition());
             pausedTrack = track;
             player.stopTrack();
         }
@@ -97,7 +99,7 @@ public class AudioTrackScheduler extends AudioEventAdapter {
     public void onTrackEnd(AudioPlayer player, AudioTrack track, AudioTrackEndReason endReason) {
         if(endReason.mayStartNext) {
             pausedTrack = null;
-            history.push(last = track);
+            history.push(track);
             nextTrack();
         }
     }

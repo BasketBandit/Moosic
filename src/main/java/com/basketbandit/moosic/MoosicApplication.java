@@ -61,6 +61,7 @@ public class MoosicApplication {
 						scheduler.onTrackEnd(player, scheduler.getActiveTrack(), AudioTrackEndReason.FINISHED);
 					}
 				}
+				case "shuffle" -> scheduler.shuffleQueue();
 				case "clearQueue" -> scheduler.getQueue().clear();
 				case "clearHistory" -> scheduler.getHistory().clear();
 				case "volume" -> {

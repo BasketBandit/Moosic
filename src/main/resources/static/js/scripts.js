@@ -9,6 +9,10 @@ $(document).ready(function() {
         $.post("action", { parameter: "skip" }, function(data, status){});
     });
 
+    $("#shuffle").click(function(){
+        $.post("action", { parameter: "shuffle" }, function(data, status){});
+    });
+
     $("#clearQueue").click(function(){
         $.post("action", { parameter: "clearQueue" }, function(data, status){});
     });
