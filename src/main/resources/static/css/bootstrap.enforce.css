@@ -43,8 +43,8 @@ small {
 	transform: rotate(180deg);
 }
 
-.progress {
-
+#volume {
+    width: 75px;
 }
 
 #player {
@@ -58,8 +58,12 @@ small {
     margin-left: 0.75rem!important;
 }
 
-#volume {
-    width: 75px;
+#controls button {
+    color: #343a40;
+}
+
+#controls button:hover {
+    filter: brightness(50%);
 }
 
 /* Index Page */
