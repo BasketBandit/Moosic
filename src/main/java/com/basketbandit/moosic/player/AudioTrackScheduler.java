@@ -27,14 +27,6 @@ public class AudioTrackScheduler extends AudioEventAdapter {
         this.audioSendHandler.start();
     }
 
-    public void shuffle() {
-        Collections.shuffle(queue);
-    }
-
-    public void remove(int index) {
-        queue.remove(Math.max(0, Math.min((queue.size()-1), index)));
-    }
-
     public List<AudioTrack> getQueue() {
         return queue;
     }
@@ -69,6 +61,18 @@ public class AudioTrackScheduler extends AudioEventAdapter {
             AudioTrack track = queue.poll();
             player.startTrack(track, false);
         }
+    }
+
+    public void hoist(int index) {
+        queue.add(0, queue.remove(index));
+    }
+
+    public void shuffle() {
+        Collections.shuffle(queue);
+    }
+
+    public void remove(int index) {
+        queue.remove(Math.max(0, Math.min((queue.size()-1), index)));
     }
 
     @Override

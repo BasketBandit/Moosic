@@ -66,6 +66,11 @@ public class MoosicApplication {
 						scheduler.remove(Integer.parseInt(value));
 					}
 				}
+				case "hoist" -> {
+					if(value != null) {
+						scheduler.hoist(Integer.parseInt(value));
+					}
+				}
 				case "shuffle" -> scheduler.shuffle();
 				case "clearQueue" -> scheduler.getQueue().clear();
 				case "clearHistory" -> scheduler.getHistory().clear();

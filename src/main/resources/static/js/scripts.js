@@ -45,6 +45,12 @@ $(document).ready(function() {
         });
     });
 
+    $(document).on('click', '.hoist', function(){
+        $.post("action", { parameter: "hoist", value: $(this).data('index') }, function(data, status){
+            $('#queueCollapse').load("/queue");
+        });
+    });
+
     function refreshData(){
         $('#queueCollapse').load("/queue");
         $('#historyCollapse').load("/history");

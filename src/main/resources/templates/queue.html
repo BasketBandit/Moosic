@@ -13,7 +13,11 @@
             <td scope="row" th:text="${status.count}"></td>
             <td><a target="_blank" th:href="${track.getInfo().uri}" th:text="${track.getInfo().title}"></a></td>
             <td th:text="${track.getUserData().get('duration')}"></td>
-            <td><button class="remove" th:attr="data-index=${status.index}"><i class="fas fa-trash-alt" title="Remove"></i></button></td>
+            <td>
+                <button th:if="${status.index} > 0" class="hoist" th:attr="data-index=${status.index}"><i class="fas fa-sort-numeric-up" title="Hoist"></i></i></button>
+                <button class="queue" th:attr="data-url=${track.getInfo().uri}"><i class="fas fa-history" title="Queue"></i></button>
+                <button class="remove" th:attr="data-index=${status.index}"><i class="fas fa-trash-alt" title="Remove"></i></button>
+            </td>
         </tr>
     </tbody>
 </table>
