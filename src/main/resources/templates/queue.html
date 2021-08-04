@@ -5,6 +5,7 @@
             <th scope="col">#</th>
             <th scope="col">Title</th>
             <th scope="col">Length</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody th:fragment="queue">
@@ -12,6 +13,7 @@
             <td scope="row" th:text="${status.count}"></td>
             <td><a target="_blank" th:href="${track.getInfo().uri}" th:text="${track.getInfo().title}"></a></td>
             <td th:text="${track.getUserData().get('duration')}"></td>
+            <td><button class="remove" th:attr="data-index=${status.index}"><i class="fas fa-trash-alt" title="Remove"></i></button></td>
         </tr>
     </tbody>
 </table>

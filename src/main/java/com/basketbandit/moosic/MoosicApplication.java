@@ -53,7 +53,7 @@ public class MoosicApplication {
 
 	@PostMapping("/action")
 	public void processAction(@RequestParam(value = "parameter", required = false) String parameter, @RequestParam(value = "value", required = false) String value) {
-		if(parameter != null){
+		if(parameter != null) {
 			switch(parameter) {
 				case "play" -> player.setPaused(!player.isPaused());
 				case "skip" -> {
@@ -61,13 +61,17 @@ public class MoosicApplication {
 						scheduler.onTrackEnd(player, scheduler.getActiveTrack(), AudioTrackEndReason.FINISHED);
 					}
 				}
-				case "shuffle" -> scheduler.shuffleQueue();
+				case "remove" -> {
+					if(value != null) {
+						scheduler.remove(Integer.parseInt(value));
+					}
+				}
+				case "shuffle" -> scheduler.shuffle();
 				case "clearQueue" -> scheduler.getQueue().clear();
 				case "clearHistory" -> scheduler.getHistory().clear();
 				case "volume" -> {
 					if(value != null) {
-						int volume = Integer.parseInt(value);
-						player.setVolume(Math.min(100, Math.max(0, volume)));
+						player.setVolume(Math.min(100, Math.max(0, Integer.parseInt(value))));
 					}
 				}
 			}

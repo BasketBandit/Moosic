@@ -51,7 +51,7 @@ small {
     justify-content: center;
 }
 
-#player button, #history button {
+#player button, #queue button, #history button {
     border: none;
     background-color: unset;
     padding: 0;

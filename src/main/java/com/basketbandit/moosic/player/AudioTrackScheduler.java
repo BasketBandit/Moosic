@@ -16,7 +16,7 @@ public class AudioTrackScheduler extends AudioEventAdapter {
     private final AudioSendHandler audioSendHandler;
     private final AudioPlayerManager manager;
     private final AudioPlayer player;
-    private final Queue<AudioTrack> queue = new LinkedList<>();
+    private final LinkedList<AudioTrack> queue = new LinkedList<>();
     private final Deque<AudioTrack> history = new ArrayDeque<>(); // Originally wanted to use java.util.Stack but despite being LIFO the .foreach doesn't respect that ordering whereas java.util.Deque does.
     private AudioTrack pausedTrack;
 
@@ -27,14 +27,15 @@ public class AudioTrackScheduler extends AudioEventAdapter {
         this.audioSendHandler.start();
     }
 
-    public void shuffleQueue() {
-        List<AudioTrack> temp = new ArrayList<>(queue);
-        Collections.shuffle(temp);
-        queue.clear();
-        queue.addAll(temp);
+    public void shuffle() {
+        Collections.shuffle(queue);
     }
 
-    public Queue<AudioTrack> getQueue() {
+    public void remove(int index) {
+        queue.remove(Math.max(0, Math.min((queue.size()-1), index)));
+    }
+
+    public List<AudioTrack> getQueue() {
         return queue;
     }
 

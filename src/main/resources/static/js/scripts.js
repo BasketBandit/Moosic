@@ -33,8 +33,16 @@ $(document).ready(function() {
         $.post("action", { parameter: "volume", value: $("#volume").val() }, function(data, status){});
     });
 
-    $(document).on('click', '.requeue', function(){
-        $.post("load", { url: $(this).data('url') }, function(data, status){});
+    $(document).on('click', '.queue', function(){
+        $.post("load", { url: $(this).data('url') }, function(data, status){
+            $('#queueCollapse').load("/queue");
+        });
+    });
+
+    $(document).on('click', '.remove', function(){
+        $.post("action", { parameter: "remove", value: $(this).data('index') }, function(data, status){
+            $('#queueCollapse').load("/queue");
+        });
     });
 
     function refreshData(){
