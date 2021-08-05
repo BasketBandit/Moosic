@@ -19,20 +19,20 @@ public class AudioLoadHandler {
 
     public void load(String url) {
         manager.loadItem(url, new FunctionalResultHandler(audioTrack -> {
-            HashMap<String, String> data = new HashMap<>() {{
+            audioTrack.setUserData(new HashMap<>() {{
                 put("position", toTime(0));
                 put("duration", toTime(audioTrack.getDuration()));
-            }};
-            audioTrack.setUserData(data);
+            }});
             audioTrackScheduler.queue(audioTrack);
-        }, playlist -> playlist.getTracks().forEach(audioTrack -> {
-            HashMap<String, String> data = new HashMap<>() {{
-                put("position", toTime(0));
-                put("duration", toTime(audioTrack.getDuration()));
-            }};
-            audioTrack.setUserData(data);
-            audioTrackScheduler.queue(audioTrack);
-        }), null, null));
+        }, playlist -> {
+            playlist.getTracks().forEach(audioTrack -> {
+                audioTrack.setUserData(new HashMap<>() {{
+                    put("position", toTime(0));
+                    put("duration", toTime(audioTrack.getDuration()));
+                }});
+            });
+            audioTrackScheduler.queueAll(playlist.getTracks());
+        }, null, null));
     }
 
     public static String toTime(long ms) {
