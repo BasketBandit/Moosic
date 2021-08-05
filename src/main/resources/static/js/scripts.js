@@ -2,22 +2,15 @@ $(document).ready(function() {
     $("#play").click(function(){
         $.post("action", { parameter: "play" }, function(data, status){
             $('#play').load("/controls");
-            $('#active').load("/active");
         });
     });
 
     $("#skip").click(function(){
-        $.post("action", { parameter: "skip" }, function(data, status) {
-            $('#active').load("/active");
-            $('#queueCollapse').load("/queue");
-            $('#historyCollapse').load("/history");
-        });
+        $.post("action", { parameter: "skip" }, function(data, status) {});
     });
 
     $("#shuffle").click(function(){
-        $.post("action", { parameter: "shuffle" }, function(data, status){
-            $('#queueCollapse').load("/queue");
-        });
+        $.post("action", { parameter: "shuffle" }, function(data, status) {});
     });
 
     $("#clearQueue").click(function(){
@@ -51,14 +44,6 @@ $(document).ready(function() {
             $('#queueCollapse').load("/queue");
         });
     });
-
-    function refreshData(){
-        /*$('#queueCollapse').load("/queue");*/
-        $('#historyCollapse').load("/history");
-        $('#active').load("/active");
-        setTimeout(refreshData, 1000);
-    }
-    refreshData();
 
     function refreshProgress() {
        $('#progress').load("/progress");

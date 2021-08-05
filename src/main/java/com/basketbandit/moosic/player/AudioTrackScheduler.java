@@ -1,5 +1,6 @@
 package com.basketbandit.moosic.player;
 
+import com.basketbandit.moosic.socket.SocketHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
@@ -8,11 +9,13 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.socket.TextMessage;
 
 import java.util.*;
 
 public class AudioTrackScheduler extends AudioEventAdapter {
     private static final Logger log = LoggerFactory.getLogger(AudioTrackScheduler.class);
+    private final SocketHandler socketHandler = new SocketHandler();
     private final AudioSendHandler audioSendHandler;
     private final AudioPlayerManager manager;
     private final AudioPlayer player;
@@ -65,10 +68,12 @@ public class AudioTrackScheduler extends AudioEventAdapter {
 
     public void move(int index, int destination) {
         queue.add(destination, queue.remove(index));
+        socketHandler.broadcast(new TextMessage("trackMoved"));
     }
 
     public void shuffle() {
         Collections.shuffle(queue);
+        socketHandler.broadcast(new TextMessage("queueShuffled"));
     }
 
     public void remove(int index) {
@@ -98,6 +103,7 @@ public class AudioTrackScheduler extends AudioEventAdapter {
     @Override
     public void onTrackStart(AudioPlayer player, AudioTrack track) {
         log.info("Playing track: {}", track.getInfo().title);
+        socketHandler.broadcast(new TextMessage("trackStarted"));
     }
 
     @Override
@@ -107,6 +113,7 @@ public class AudioTrackScheduler extends AudioEventAdapter {
             history.push(track);
             nextTrack();
         }
+        socketHandler.broadcast(new TextMessage("trackEnded"));
     }
 
     @Override
