@@ -52,7 +52,7 @@ public class MoosicApplication {
 	}
 
 	@PostMapping("/action")
-	public void processAction(@RequestParam(value = "parameter", required = false) String parameter, @RequestParam(value = "value", required = false) String value) {
+	public void processAction(@RequestParam(value = "parameter", required = false) String parameter, @RequestParam(value = "value", required = false) String value, @RequestParam(value = "extra", required = false) String extra) {
 		if(parameter != null) {
 			switch(parameter) {
 				case "play" -> player.setPaused(!player.isPaused());
@@ -66,9 +66,9 @@ public class MoosicApplication {
 						scheduler.remove(Integer.parseInt(value));
 					}
 				}
-				case "hoist" -> {
-					if(value != null) {
-						scheduler.hoist(Integer.parseInt(value));
+				case "move" -> {
+					if(value != null && extra != null) {
+						scheduler.move(Integer.parseInt(value), Integer.parseInt(extra));
 					}
 				}
 				case "shuffle" -> scheduler.shuffle();

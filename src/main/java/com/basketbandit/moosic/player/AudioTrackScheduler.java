@@ -63,8 +63,8 @@ public class AudioTrackScheduler extends AudioEventAdapter {
         }
     }
 
-    public void hoist(int index) {
-        queue.add(0, queue.remove(index));
+    public void move(int index, int destination) {
+        queue.add(destination, queue.remove(index));
     }
 
     public void shuffle() {

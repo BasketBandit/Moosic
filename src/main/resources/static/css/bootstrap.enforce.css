@@ -66,6 +66,22 @@ small {
     filter: brightness(50%);
 }
 
+/* Table Dragging */
+.table-grabable > tbody .grabable {
+    cursor: grab;
+    user-select: none;
+}
+.table-grabable > tbody > tr.grabbed {
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
+}
+.table-grabable > tbody > tr.grabbed:active {
+    user-input: none;
+}
+.table-grabable > tbody > tr.grabbed:active * {
+    user-input: none;
+    cursor: grabbing !important;
+}
+
 /* Index Page */
 
 .bg {

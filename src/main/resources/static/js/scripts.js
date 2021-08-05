@@ -2,15 +2,22 @@ $(document).ready(function() {
     $("#play").click(function(){
         $.post("action", { parameter: "play" }, function(data, status){
             $('#play').load("/controls");
+            $('#active').load("/active");
         });
     });
 
     $("#skip").click(function(){
-        $.post("action", { parameter: "skip" }, function(data, status){});
+        $.post("action", { parameter: "skip" }, function(data, status) {
+            $('#active').load("/active");
+            $('#queueCollapse').load("/queue");
+            $('#historyCollapse').load("/history");
+        });
     });
 
     $("#shuffle").click(function(){
-        $.post("action", { parameter: "shuffle" }, function(data, status){});
+        $.post("action", { parameter: "shuffle" }, function(data, status){
+            $('#queueCollapse').load("/queue");
+        });
     });
 
     $("#clearQueue").click(function(){
@@ -45,14 +52,8 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on('click', '.hoist', function(){
-        $.post("action", { parameter: "hoist", value: $(this).data('index') }, function(data, status){
-            $('#queueCollapse').load("/queue");
-        });
-    });
-
     function refreshData(){
-        $('#queueCollapse').load("/queue");
+        /*$('#queueCollapse').load("/queue");*/
         $('#historyCollapse').load("/history");
         $('#active').load("/active");
         setTimeout(refreshData, 1000);
