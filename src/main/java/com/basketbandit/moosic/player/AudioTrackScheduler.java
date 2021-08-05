@@ -54,6 +54,16 @@ public class AudioTrackScheduler extends AudioEventAdapter {
     public void queue(AudioTrack track) {
         log.info("Queued track: {}", track.getInfo().title);
         queue.offer(track);
+        socketHandler.broadcast(new TextMessage("trackQueued"));
+        if(player.getPlayingTrack() == null) {
+            nextTrack();
+        }
+    }
+
+    public void queueAll(Collection<AudioTrack> tracks) {
+        log.info("Queued {} tracks.", tracks.size());
+        queue.addAll(tracks);
+        socketHandler.broadcast(new TextMessage("trackQueued"));
         if(player.getPlayingTrack() == null) {
             nextTrack();
         }
@@ -78,6 +88,7 @@ public class AudioTrackScheduler extends AudioEventAdapter {
 
     public void remove(int index) {
         queue.remove(Math.max(0, Math.min((queue.size()-1), index)));
+        socketHandler.broadcast(new TextMessage("trackRemoved"));
     }
 
     @Override
