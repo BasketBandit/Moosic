@@ -25,10 +25,13 @@ $(document).ready(function() {
                 $('#queueCollapse').load("/queue");
                 break;
             case "queueShuffled":
+            case "trackQueued":
             case "trackMoved":
+            case "trackRemoved":
                 $('#queueCollapse').load("/queue");
                 break;
             case "trackEnded":
+                $('#active').load("/active");
                 $('#historyCollapse').load("/history");
                 break;
             default:

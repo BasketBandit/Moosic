@@ -30,19 +30,15 @@ $(document).ready(function() {
     });
 
     $("#volume").on("input", function(event) {
-        $.post("action", { parameter: "volume", value: $("#volume").val() }, function(data, status){});
+        $.post("action", { parameter: "volume", value: $("#volume").val() }, function(data, status) {});
     });
 
     $(document).on('click', '.queue', function(){
-        $.post("load", { url: $(this).data('url') }, function(data, status){
-            $('#queueCollapse').load("/queue");
-        });
+        $.post("load", { url: $(this).data('url') }, function(data, status) {});
     });
 
     $(document).on('click', '.remove', function(){
-        $.post("action", { parameter: "remove", value: $(this).data('index') }, function(data, status){
-            $('#queueCollapse').load("/queue");
-        });
+        $.post("action", { parameter: "remove", value: $(this).data('index') }, function(data, status) {});
     });
 
     function refreshProgress() {
