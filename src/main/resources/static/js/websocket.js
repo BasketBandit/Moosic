@@ -36,6 +36,7 @@ $(document).ready(function() {
                 break;
             case "trackError":
                 $("#trackError").fadeIn(100).delay(3000).fadeOut(400);
+                break;
             default:
             //
         }
