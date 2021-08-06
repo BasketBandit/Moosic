@@ -15,7 +15,7 @@
 
         <!-- Queue -->
         <div class="container">
-            <div class="w-100 shadow-sm bg-light text-center px-3 py-2 my-2">
+            <div class="w-100 shadow-sm bg-light text-center px-3 py-2 my-2 rounded">
                 <div class="mt-1">
                     <span>Currently Playing</span><br>
                     <div id="active" th:insert="active"></div>
@@ -33,12 +33,14 @@
                 </div>
             </div>
 
-            <div class="shadow-sm bg-light px-3 py-2 my-1">
+            <div id="trackError" class="d-none bg-danger text-white text-center p-3 my-2 rounded">Something broke whilst playing that track... skipping.</div>
+
+            <div class="shadow-sm bg-light px-3 py-2 my-2 rounded">
                 <div id="queueCollapseButton" class="position-relative pointer arrow" data-bs-toggle="collapse" data-bs-target="#queueCollapse" aria-expanded="true" aria-controls="queueCollapse">Queue</div>
                 <div id="queueCollapse" class="collapse show" th:insert="queue"></div>
             </div>
 
-            <div class="shadow-sm bg-light px-3 py-2 my-2">
+            <div class="shadow-sm bg-light px-3 py-2 my-2 rounded">
                 <div id="historyCollapseButton" class="position-relative pointer arrow" data-bs-toggle="collapse" data-bs-target="#historyCollapse" aria-expanded="true" aria-controls="historyCollapse">History</div>
                 <div id="historyCollapse" class="collapse show" th:insert="history"></div>
             </div>

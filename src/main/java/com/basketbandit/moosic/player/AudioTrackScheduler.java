@@ -129,7 +129,8 @@ public class AudioTrackScheduler extends AudioEventAdapter {
 
     @Override
     public void onTrackException(AudioPlayer player, AudioTrack track, FriendlyException exception) {
-        log.error("Exception when playing track: {}", exception.getMessage(), exception);
+        log.error("Exception when playing track: {}", exception.getMessage());
+        socketHandler.broadcast(new TextMessage("trackError"));
         nextTrack();
     }
 

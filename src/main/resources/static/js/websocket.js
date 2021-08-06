@@ -34,6 +34,8 @@ $(document).ready(function() {
                 $('#active').load("/active");
                 $('#historyCollapse').load("/history");
                 break;
+            case "trackError":
+                $("#trackError").fadeIn(100).delay(3000).fadeOut(400);
             default:
             //
         }
