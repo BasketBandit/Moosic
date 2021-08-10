@@ -26,16 +26,6 @@ public class SocketHandler extends TextWebSocketHandler {
         }
     }
 
-    public void broadcast(TextMessage message) {
-        try {
-            for(WebSocketSession client : clients) {
-                client.sendMessage(message);
-            }
-        } catch(Exception e) {
-            log.error("There was an error handling message: {}", e.getMessage(), e);
-        }
-    }
-
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
         clients.add(session);
