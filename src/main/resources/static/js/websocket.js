@@ -1,6 +1,6 @@
 $(document).ready(function() {
     function connect() {
-        ws = new WebSocket('ws://localhost/events');
+        ws = new WebSocket('ws://localhost:' + location.port +'/events');
         ws.onmessage = function(data){
             handleCommand(data.data);
         }
