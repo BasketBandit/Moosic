@@ -28,6 +28,7 @@ public class AudioTrackScheduler extends AudioEventAdapter {
     public AudioTrackScheduler(AudioPlayerManager manager, AudioPlayer player) {
         this.manager = manager;
         this.player = player;
+        this.player.setVolume(50);
         this.player.addListener(this);
     }
 
