@@ -11,13 +11,11 @@ public class LavaPlayer {
     private static final Logger log = LoggerFactory.getLogger(LavaPlayer.class);
     private final AudioPlayerManager manager = new DefaultAudioPlayerManager();
     private final AudioPlayer player = manager.createPlayer();
-    private final AudioTrackScheduler audioTrackScheduler = new AudioTrackScheduler(manager, player);
-    private final AudioLoadHandler audioLoadHandler = new AudioLoadHandler(manager, audioTrackScheduler);
+    private final AudioTrackScheduler scheduler = new AudioTrackScheduler(manager, player);
 
     public LavaPlayer() {
         AudioSourceManagers.registerRemoteSources(this.manager);
-        this.player.setVolume(33);
-        this.player.addListener(audioTrackScheduler);
+        new AudioSendHandler(manager, player).start();
     }
 
     public AudioPlayer getPlayer() {
@@ -25,10 +23,10 @@ public class LavaPlayer {
     }
 
     public AudioTrackScheduler getAudioTrackScheduler() {
-        return audioTrackScheduler;
+        return scheduler;
     }
 
-    public AudioLoadHandler getAudioLoadHandler() {
-        return audioLoadHandler;
+    public void load(String url) {
+        scheduler.load(url);
     }
 }

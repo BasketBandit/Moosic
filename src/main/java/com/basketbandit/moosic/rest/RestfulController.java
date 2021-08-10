@@ -29,7 +29,7 @@ public class RestfulController {
     @PostMapping("/load")
     public RedirectView load(@RequestParam(value = "url") String url) {
         if(url != null) {
-            lavaPlayer.getAudioLoadHandler().load(url);
+            lavaPlayer.load(url);
         }
         return new RedirectView("/");
     }
