@@ -33,13 +33,29 @@ $(document).ready(function() {
             if(drag && index != tr.index()) {
               drag = false;
             }
-            $.post("action", { parameter: "move", value: $(tr).data('index'), extra: $(tr).index() }, function(data, status){
-                $('#queueCollapse').load("/queue");
+            $.post('action', { parameter: 'move', value: $(tr).data('index'), extra: $(tr).index() }, function(data, status){
+                $('#queueCollapse').load('/queue');
             });
             $(document).unbind('mousemove', move).unbind('mouseup', up);
             $(tr).removeClass('grabbed');
         }
 
         $(document).mousemove(move).mouseup(up);
+    });
+
+    $('#queueCollapseButton').click(function(event) {
+        event.target.classList.toggle('down');
+    });
+
+    $(document).on('click', '#clearQueue', function() {
+        $.post('action', { parameter: 'clearQueue' }, function(data, status){});
+    });
+
+    $(document).on('click', '.queue', function() {
+        $.post('load', { url: $(this).data('url') }, function(data, status) {});
+    });
+
+    $(document).on('click', '.remove', function() {
+        $.post('action', { parameter: 'remove', value: $(this).data('index') }, function(data, status) {});
     });
 });
