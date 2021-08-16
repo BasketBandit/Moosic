@@ -17,7 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @RestController
 public class RestfulController {
     private static final Logger log = LoggerFactory.getLogger(Moosic.class);
-    private final LavaPlayer lavaPlayer = new LavaPlayer();
+    private final LavaPlayer lavaPlayer = Moosic.lavaPlayer;
     private final AudioPlayer player = lavaPlayer.getPlayer();
     private final AudioTrackScheduler scheduler = lavaPlayer.getAudioTrackScheduler();
 

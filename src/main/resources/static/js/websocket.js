@@ -19,6 +19,11 @@ $(document).ready(function() {
     }
 
     function handleCommand(data) {
+        if(data.startsWith("t:")) {
+            $('.progress-bar').css('width', data.split(':')[1] + '%');
+            return;
+        }
+
         switch(data) {
             case "trackStarted":
                 $('#active').load("/active");

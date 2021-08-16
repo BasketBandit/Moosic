@@ -1,5 +1,6 @@
 package com.basketbandit.moosic.player;
 
+import com.basketbandit.moosic.Moosic;
 import com.basketbandit.moosic.socket.FacadeWebSocketSession;
 import com.basketbandit.moosic.socket.SocketHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
@@ -17,7 +18,7 @@ import java.util.*;
 
 public class AudioTrackScheduler extends AudioEventAdapter {
     private static final Logger log = LoggerFactory.getLogger(AudioTrackScheduler.class);
-    private final SocketHandler socketHandler = new SocketHandler();
+    private final SocketHandler socketHandler = Moosic.socketHandler;
     private final FacadeWebSocketSession facade = new FacadeWebSocketSession();
     private final AudioPlayerManager manager;
     private final AudioPlayer player;
