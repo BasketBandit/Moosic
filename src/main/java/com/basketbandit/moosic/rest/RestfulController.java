@@ -4,7 +4,6 @@ import com.basketbandit.moosic.Moosic;
 import com.basketbandit.moosic.player.AudioTrackScheduler;
 import com.basketbandit.moosic.player.LavaPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
-import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,38 +42,6 @@ public class RestfulController {
         modelAndView.addObject("active", scheduler.getActiveTrack());
         modelAndView.addObject("progress", scheduler.getActiveTrackProgress());
         return modelAndView;
-    }
-
-    @PostMapping("/action")
-    public void processAction(@RequestParam(value = "parameter", required = false) String parameter, @RequestParam(value = "value", required = false) String value, @RequestParam(value = "extra", required = false) String extra) {
-        if(parameter != null) {
-            switch(parameter) {
-                case "play" -> player.setPaused(!player.isPaused());
-                case "skip" -> {
-                    if(scheduler.getActiveTrack() != null) {
-                        scheduler.onTrackEnd(player, scheduler.getActiveTrack(), AudioTrackEndReason.FINISHED);
-                    }
-                }
-                case "remove" -> {
-                    if(value != null) {
-                        scheduler.remove(Integer.parseInt(value));
-                    }
-                }
-                case "move" -> {
-                    if(value != null && extra != null) {
-                        scheduler.move(Integer.parseInt(value), Integer.parseInt(extra));
-                    }
-                }
-                case "shuffle" -> scheduler.shuffle();
-                case "clearQueue" -> scheduler.getQueue().clear();
-                case "clearHistory" -> scheduler.getHistory().clear();
-                case "volume" -> {
-                    if(value != null) {
-                        player.setVolume(Math.min(100, Math.max(0, Integer.parseInt(value))));
-                    }
-                }
-            }
-        }
     }
 
     @GetMapping("/queue")
