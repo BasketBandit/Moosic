@@ -7,11 +7,8 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 public class RestfulController {
@@ -23,14 +20,6 @@ public class RestfulController {
     @GetMapping("/")
     public ModelAndView root() {
         return new ModelAndView("index");
-    }
-
-    @PostMapping("/load")
-    public RedirectView load(@RequestParam(value = "url") String url) {
-        if(url != null) {
-            lavaPlayer.load(url);
-        }
-        return new RedirectView("/");
     }
 
     @GetMapping("/dashboard")

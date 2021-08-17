@@ -56,6 +56,7 @@ $(document).ready(function() {
 
     $(document).on('click', '#addQueue', function() {
         ws.send("action:load,value:"+$('#addQueueInput').val());
+        $('#addQueueInput').val('');
     });
 
     $('#volume').on('input', function(event) {
