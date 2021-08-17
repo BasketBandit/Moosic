@@ -30,6 +30,7 @@ $(document).ready(function() {
             case "trackStarted":
                 $('#active').load("/active");
                 $('#queueCollapse').load("/queue");
+
                 break;
             case "queueShuffled":
             case "trackQueued":
@@ -49,6 +50,10 @@ $(document).ready(function() {
         }
     }
 
+    $(document).on('click', '#addQueue', function() {
+        ws.send("action:load,value:"+$('#addQueueInput').val());
+    });
+
     $('#volume').on('input', function(event) {
         ws.send("action:volume,value:"+$('#volume').val());
     });
@@ -63,6 +68,22 @@ $(document).ready(function() {
 
     $('#shuffle').click(function(){
         ws.send("action:shuffle");
+    });
+
+    $(document).on('click', '#clearQueue', function() {
+        ws.send("action:clearQueue");
+    });
+
+    $(document).on('click', '#clearHistory', function() {
+        ws.send("action:clearHistory");
+    });
+
+    $(document).on('click', '.queue', function() {
+        ws.send("action:load,value:"+$(this).data('url'));
+    });
+
+    $(document).on('click', '.remove', function() {
+        ws.send("action:remove,value:"+$(this).data('index'));
     });
 
     /* Grabbed (haha) from https://jsfiddle.net/7ko9ay1e/ */
@@ -105,22 +126,6 @@ $(document).ready(function() {
         }
 
         $(document).mousemove(move).mouseup(up);
-    });
-
-    $(document).on('click', '#clearQueue', function() {
-        ws.send("action:clearQueue");
-    });
-
-    $(document).on('click', '#clearHistory', function() {
-        ws.send("action:clearHistory");
-    });
-
-    $(document).on('click', '.queue', function() {
-        ws.send("action:load,value:"+$(this).data('url'));
-    });
-
-    $(document).on('click', '.remove', function() {
-        ws.send("action:remove,value:"+$(this).data('index'));
     });
 
     connect();
