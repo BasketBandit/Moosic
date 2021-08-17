@@ -19,7 +19,7 @@ public class UpdateProgressTask implements Task {
     @Override
     public void run() {
         if(scheduler.getActiveTrack() != null) {
-            socketHandler.handleTextMessage(facade, new TextMessage("t:" + scheduler.getActiveTrackProgress()));
+            socketHandler.handleTextMessage(facade, new TextMessage(scheduler.getActiveTrack().getUserData().toString()));
         }
     }
 

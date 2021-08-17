@@ -40,7 +40,6 @@ public class RestfulController {
         modelAndView.addObject("queue", scheduler.getQueue());
         modelAndView.addObject("history", scheduler.getHistory());
         modelAndView.addObject("active", scheduler.getActiveTrack());
-        modelAndView.addObject("progress", scheduler.getActiveTrackProgress());
         return modelAndView;
     }
 
@@ -69,7 +68,6 @@ public class RestfulController {
     public ModelAndView getProgress() {
         ModelAndView modelAndView = new ModelAndView("progress");
         modelAndView.addObject("active", scheduler.getActiveTrack());
-        modelAndView.addObject("progress", scheduler.getActiveTrackProgress());
         return modelAndView;
     }
 
