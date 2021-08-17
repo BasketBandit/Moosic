@@ -1,8 +1,8 @@
 <div class="row justify-content-center">
-    <small class="col text-muted vertical-align-middle mx-1" th:text="${active != null} ? ${active.getUserData().get('position')} : '--:--'"></small>
+    <small id="trackPosition" class="col text-muted vertical-align-middle mx-1" th:text="${active != null} ? ${active.getUserData().get('position')} : '--:--'"></small>
     <div class="col-10 progress my-2">
-        <div th:if="${active != null}" class="progress-bar" role="progressbar" th:style="${'width:' + progress + '%'}" aria-valuemin="0" th:attr="aria-valuenow=${active.getPosition()}, aria-valuemax=${active.getDuration()}"></div>
+        <div th:if="${active != null}" class="progress-bar" role="progressbar" th:style="${'width:' + active.getUserData().get('positionPercent') + '%'}" aria-valuemin="0" th:attr="aria-valuenow=${active.getPosition()}, aria-valuemax=${active.getDuration()}"></div>
         <div th:if="${active == null}" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1"></div>
     </div>
-    <small class="col text-muted vertical-align-middle mx-1" th:text="${active != null} ? ${active.getUserData().get('duration')} : '--:--'"></small>
+    <small id="trackDuration" class="col text-muted vertical-align-middle mx-1" th:text="${active != null} ? ${active.getUserData().get('duration')} : '--:--'"></small>
 </div>
