@@ -19,8 +19,12 @@ $(document).ready(function() {
     }
 
     function handleCommand(data) {
-        if(data.startsWith("t:")) {
-            $('.progress-bar').css('width', data.split(':')[1] + '%');
+        if(data.startsWith("{")) {
+            data = data.substring(1, data.length-1);
+            var segment = data.split(',');
+            $('#trackDuration').text(segment[0].split('=')[1]);
+            $('#trackPosition').text(segment[1].split('=')[1]);
+            $('.progress-bar').css('width', segment[2].split('=')[1] + '%');
             return;
         }
 
@@ -30,7 +34,7 @@ $(document).ready(function() {
             case "trackStarted":
                 $('#active').load("/active");
                 $('#queueCollapse').load("/queue");
-
+                $('#progress').load("/progress");
                 break;
             case "queueShuffled":
             case "trackQueued":
