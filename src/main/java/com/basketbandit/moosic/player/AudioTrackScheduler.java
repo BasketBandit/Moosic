@@ -37,6 +37,7 @@ public class AudioTrackScheduler extends AudioEventAdapter {
         manager.loadItem(url, new FunctionalResultHandler(track -> {
             track.setUserData(new HashMap<>() {{
                 put("position", toTime(0));
+                put("positionPercent", 0.0f);
                 put("duration", toTime(track.getDuration()));
             }});
             log.info("Queued track: {}", track.getInfo().title);
@@ -49,6 +50,7 @@ public class AudioTrackScheduler extends AudioEventAdapter {
             playlist.getTracks().forEach(audioTrack -> {
                 audioTrack.setUserData(new HashMap<>() {{
                     put("position", toTime(0));
+                    put("positionPercent", 0.0f);
                     put("duration", toTime(audioTrack.getDuration()));
                 }});
             });
@@ -69,17 +71,18 @@ public class AudioTrackScheduler extends AudioEventAdapter {
         return history;
     }
 
-    public AudioTrack getActiveTrack() {
-        return (player.getPlayingTrack() != null) ? player.getPlayingTrack() : (pausedTrack != null && player.isPaused()) ? pausedTrack : null;
-    }
-
     @SuppressWarnings("unchecked")
-    public double getActiveTrackProgress() {
-        if(getActiveTrack() != null) {
-            ((HashMap<String, String>) getActiveTrack().getUserData()).put("position", toTime(getActiveTrack().getPosition()));
-            return (double) Math.round(((getActiveTrack().getPosition()+.0)/(getActiveTrack().getDuration()+.0)*100) * 100) / 100;
+    public AudioTrack getActiveTrack() {
+        AudioTrack track = (player.getPlayingTrack() != null) ? player.getPlayingTrack() : (pausedTrack != null && player.isPaused()) ? pausedTrack : null;
+        if(track != null) {
+            HashMap<String, String> data = new HashMap<>(){{
+                put("position", toTime(track.getPosition()));
+                put("positionPercent", "" + Math.round(((track.getPosition()+.0)/(track.getDuration()+.0)*100) * 100) / 100f);
+            }}; // this is used to update current position/percentage
+            ((HashMap<String, String>) track.getUserData()).putAll(data);
+            return track;
         }
-        return 0.0;
+        return null;
     }
 
     public void nextTrack() {
