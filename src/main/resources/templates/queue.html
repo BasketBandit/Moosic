@@ -9,10 +9,10 @@
         </tr>
     </thead>
     <tbody th:fragment="queue">
-        <tr class="grabable" th:attr="data-index=${status.index}" th:each="track, status : ${queue}">
-            <td scope="row" th:text="${status.count}"></td>
-            <td><a target="_blank" th:href="${track.getInfo().uri}" th:text="${track.getInfo().title}"></a></td>
-            <td th:text="${track.getUserData().get('duration')}"></td>
+        <tr th:attr="data-index=${status.index}" th:each="track, status : ${queue}">
+            <td class="grabable" scope="row" th:text="${status.count}"></td>
+            <td class="grabable"><a target="_blank" th:href="${track.getInfo().uri}" th:text="${track.getInfo().title}"></a></td>
+            <td class="grabable" th:text="${track.getUserData().get('duration')}"></td>
             <td>
                 <button class="queue" th:attr="data-url=${track.getInfo().uri}"><i class="fas fa-history" title="Queue"></i></button>
                 <button class="remove" th:attr="data-index=${status.index}"><i class="fas fa-trash-alt" title="Remove"></i></button>
